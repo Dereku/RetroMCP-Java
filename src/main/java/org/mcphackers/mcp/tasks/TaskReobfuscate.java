@@ -18,6 +18,7 @@ import org.mcphackers.mcp.MCPPaths;
 import org.mcphackers.mcp.tasks.mode.TaskParameter;
 import org.mcphackers.mcp.tools.FileUtil;
 import org.mcphackers.mcp.tools.injector.SourceFileTransformer;
+import org.mcphackers.mcp.tools.injector.StringLiteralRemapper;
 import org.mcphackers.mcp.tools.mappings.MappingUtil;
 import org.mcphackers.rdi.injector.data.ClassStorage;
 import org.mcphackers.rdi.injector.data.Mappings;
@@ -80,6 +81,10 @@ public class TaskReobfuscate extends TaskStaged {
 			RDInjector injector = new RDInjector(reobfBin);
 			Mappings mappings = getMappings(injector.getStorage(), localSide);
 			if (mappings != null) {
+				String[] stringRemapPackages = mcp.getOptions().getStringArrayParameter(TaskParameter.STRING_REMAP_PACKAGES);
+				if (stringRemapPackages != null && stringRemapPackages.length > 0) {
+					new StringLiteralRemapper(mappings, stringRemapPackages).transform(injector.getStorage());
+				}
 				injector.applyMappings(mappings);
 			}
 			if (stripSourceFile) {
