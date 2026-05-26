@@ -8,7 +8,6 @@ import org.mcphackers.mcp.MCP;
 import org.mcphackers.mcp.Options;
 import org.mcphackers.mcp.tasks.Task.Side;
 
-
 /**
  * Any optional parameters which can be accessed from tasks
  *
@@ -36,7 +35,8 @@ public enum TaskParameter {
 	GUESS_GENERICS("generics", Boolean.class, false),
 	STRIP_GENERICS("stripgenerics", Boolean.class, false),
 	OUTPUT_SRC("outputsrc", Boolean.class, true),
-	STRIP_SOURCE_FILE("stripsourcefile", Boolean.class, true);
+	STRIP_SOURCE_FILE("stripsourcefile", Boolean.class, true),
+	STRING_REMAP_PACKAGES("stringremap", String[].class, new String[0]);
 
 	public static final TaskParameter[] VALUES = TaskParameter.values();
 
